@@ -1,61 +1,30 @@
-<template lang="html">
-<div class="container">
-  <div class="flex-row">
-    <div class="flex-cloumn"></div>
-  </div>
-</div>
+<template >
+  <home></home>
 </template>
 
 <script>
-import card from '@/components/card'
+import home from './home'
 
 export default {
-  data () {
-    return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
-    }
-  },
+  // data () {
+  //   return {
+  //     motto: 'Hello miniprograme'
+  //   }
+  // },
 
   components: {
-    card
+    home
   },
 
   methods: {
-    // bindViewTap () {
-    //   const url = '../logs/main'
-    //   if (mpvuePlatform === 'wx') {
-    //     mpvue.switchTab({ url })
-    //   } else {
-    //     mpvue.navigateTo({ url })
-    //   }
-    // },
-    // clickHandle (ev) {
-    //   console.log('clickHandle:', ev)
-    //   // throw {message: 'custom test'}
-    // }
   },
 
   created () {
     // let app = getApp()
+    console.log('created')
   }
 }
 </script>
 
 <style scoped>
-.container {
-  padding: 10px;
-}
-
-.flex-row {
-  display: flex;
-}
-
-.flex-cloumn {
-  padding: 20px;
-  background-color: gray;
-}
 </style>
