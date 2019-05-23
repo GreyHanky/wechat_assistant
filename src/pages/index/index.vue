@@ -6,12 +6,6 @@
 import home from './home'
 
 export default {
-  // data () {
-  //   return {
-  //     motto: 'Hello miniprograme'
-  //   }
-  // },
-
   components: {
     home
   },
@@ -20,7 +14,6 @@ export default {
   },
 
   created () {
-    // let app = getApp()
     console.log('created')
   }
 }

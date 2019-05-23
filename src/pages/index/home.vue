@@ -3,22 +3,18 @@
     <div class="wrapper"></div>
     <ul class="menu">
       <li>
-        <a href="../counter/main">counter</a>
+        <a href="../account/main">记账本</a>
       </li>
-      <li>two</li>
-      <li>three</li>
-      <li>four</li>
+      <li>加油统计</li>
     </ul>
   </nav>
 </template>
 
 <script>
-// import menus from './../conifg/menu'
 
 export default {
   data () {
     return {
-      toogleClass: false
     }
   },
   methods: {
