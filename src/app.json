@@ -2,8 +2,8 @@
   "pages": ["pages/index/main", "pages/account/main"],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#E2DA99",
+    "navigationBarBackgroundColor": "#2b2e3e",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   }
 }

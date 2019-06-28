@@ -68,7 +68,7 @@ nav {
       width: 25%;
       max-width: 100px;
       height: 150%;
-      background-color: #5e9ca0;
+      background-color: #565654;
       z-index: -1;
     }
     &:before {

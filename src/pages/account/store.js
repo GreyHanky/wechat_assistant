@@ -2,21 +2,20 @@
 // make sure to call Vue.use(Vuex) if using a module system
 import Vue from 'vue'
 import Vuex from 'vuex'
+import day from 'dayjs'
 
 Vue.use(Vuex)
 
+const date = day().format('YYYY-MM')
+
 const store = new Vuex.Store({
   state: {
-    count: 0
+    date
   },
   mutations: {
-    increment: (state) => {
+    update: (state, {date}) => {
       const obj = state
-      obj.count += 1
-    },
-    decrement: (state) => {
-      const obj = state
-      obj.count -= 1
+      obj.date = date
     }
   }
 })
