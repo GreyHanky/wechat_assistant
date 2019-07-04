@@ -35,7 +35,9 @@
 
     </scroll-view>
     <div class="footer-bottom">
+      <a href="/pages/addConsumeBill/main">
       <button>记一笔</button>
+      </a>
     </div>
   </div>
 </template>

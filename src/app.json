@@ -1,5 +1,9 @@
 {
-  "pages": ["pages/index/main", "pages/account/main"],
+  "pages": [
+    "pages/index/main",
+     "pages/account/main",
+     "pages/addConsumeBill/main"
+     ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2b2e3e",
