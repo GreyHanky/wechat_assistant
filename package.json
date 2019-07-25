@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "mpvueTemplateProjectVersion": "0.1.0",
   "description": "记账助手小程序",
-  "author": "LiuSongJiang <songjiang.liu@56qq.com>",
+  "author": "GreyHanky <noemoredemand.gmail.com>",
   "private": true,
   "scripts": {
     "dev:wx": "node build/dev-server.js wx",
