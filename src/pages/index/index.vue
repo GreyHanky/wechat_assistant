@@ -1,23 +1,46 @@
-<template >
-  <home></home>
+<template>
+  <div class="home">
+    <banner></banner>
+
+    <menus></menus>
+  </div>
+
 </template>
 
 <script>
-import home from './home'
+import menus from './menus'
+import banner from './banner'
 
 export default {
+  data () {
+    return {
+    }
+  },
   components: {
-    home
+    menus,
+    banner
   },
-
   methods: {
-  },
-
-  created () {
-    console.log('created')
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scope>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Helvetica", sans-serif;
+}
+.home {
+  position: relative;
+}
+
 </style>
