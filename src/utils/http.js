@@ -1,34 +1,38 @@
-import Fly from 'flyio/dist/npm/wx'
-import service from '../configs/service'
+import { getServiceHost } from './index'
+import {boundClass} from 'autobind-decorator'
 
-const fly = new Fly()
-
-export default class http {
-  constructor (host) {
-    const envForService = service[process.env]
-    console.log(envForService)
-    if (!envForService) {
-      throw Error('没有对应的环境变量')
-    }
-    if (!envForService[host]) {
-      throw Error('没有对应的服务名')
-    }
-
-    this.serverHost = envForService[host]
+@boundClass
+export default class Http {
+  constructor (hostName) {
+    this.service = getServiceHost(hostName)
   }
-  fire (request) {
-    wx.showToast({
-      title: '成功',
-      icon: 'success',
-      duration: 2000
-    })
-    return request.then(() => {
-      wx.hideToast()
-    }).catch(() => {
-      wx.hideToast()
+
+  fire (method = 'POST', url, data, options = {}) {
+    return new Promise((resolve, reject) => {
+      const { header = {} } = options
+      const authentiction = { 'authentiction': 'testToken' }
+
+      mpvue.request({
+        method,
+        ...options,
+        header: Object.assign(header, authentiction),
+        url: `${this.service}${url}`,
+        data,
+        success: resolve,
+        fail: reject
+      })
     })
   }
-  post (url, params, config) {
-    return this.fire(fly.post(url, params), config)
+  /**
+   *
+   * @param {*} url 请求地址
+   * @param {*} data 发送数据
+   * @param {*} options 请求配置
+   */
+  post (url, data, options) {
+    return this.fire('POST', url, data, options)
+  }
+  get (url, data, options) {
+    return this.fire('GET', url, data, options)
   }
 }

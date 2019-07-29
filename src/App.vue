@@ -1,15 +1,15 @@
 <script>
-// import {login, hasAuth, getUserInfo} from './utils/mpvueMethod.js'
-// import {post} from './utils/http.js'
+import proxyMpvue from './utils/proxyMpvue.js'
+import {login} from './api'
 
-// async function wxLogin () {
-//   const {code} = await login()
-//   await hasAuth()
-//   const {encryptedData, iv} = await getUserInfo()
-//   const jwt = await post('http://127.0.0.1:3000/wxLogin', {code, encryptedData, iv})
-//   // mpvue.
-//   console.log(jwt)
-// }
+async function wxLogin () {
+  const {code} = await proxyMpvue.login()
+  // await proxyMpvue.hasAuth()
+  const {encryptedData, iv} = await proxyMpvue.getUserInfo()
+  console.log(encryptedData)
+  const jwt = await login({code, encryptedData, iv})
+  console.log(jwt)
+}
 
 export default {
   created () {
@@ -21,7 +21,7 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-
+    wxLogin()
     let logs
     if (mpvuePlatform === 'my') {
       logs = mpvue.getStorageSync({key: 'logs'}).data || []
@@ -35,8 +35,6 @@ export default {
       logs.unshift(Date.now())
       mpvue.setStorageSync('logs', logs)
     }
-
-    // wxLogin()
   },
   log () {
     console.log(`log at:${Date.now()}`)
@@ -45,7 +43,7 @@ export default {
 </script>
 
 <style>
-body{
+body {
   height: 100%;
 }
 .container {
@@ -57,7 +55,6 @@ body{
   padding: 200rpx 0;
   box-sizing: border-box;
 }
-
 
 .text-right {
   text-align: right;
