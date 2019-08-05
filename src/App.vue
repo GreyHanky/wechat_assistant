@@ -7,8 +7,8 @@ async function wxLogin () {
   // await proxyMpvue.hasAuth()
   const {encryptedData, iv} = await proxyMpvue.getUserInfo()
   console.log(encryptedData)
-  const jwt = await login({code, encryptedData, iv})
-  console.log(jwt)
+  const {token} = await login({code, encryptedData, iv})
+  await proxyMpvue.setStorage({key: 'token', data: token})
 }
 
 export default {

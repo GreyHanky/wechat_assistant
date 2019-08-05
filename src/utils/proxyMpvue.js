@@ -3,7 +3,9 @@
 const proxyApiList = [
   'login',
   'getSetting',
-  'getUserInfo'
+  'getUserInfo',
+  'setStorage',
+  'getStorage'
 ]
 
 // 不允许扩展mpvue对象

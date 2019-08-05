@@ -1,16 +1,27 @@
 import { getServiceHost } from './index'
-import {boundClass} from 'autobind-decorator'
+import { boundClass } from 'autobind-decorator'
+import proxyMpvue from './proxyMpvue'
 
 @boundClass
 export default class Http {
   constructor (hostName) {
+    this.token = null
     this.service = getServiceHost(hostName)
   }
 
+  async getToken () {
+    if (!this.token) {
+      const {data: token} = await proxyMpvue.getStorage({ key: 'token' })
+      return token
+    }
+    return this.token
+  }
+
   fire (method = 'POST', url, data, options = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const { header = {} } = options
-      const authentiction = { 'authentiction': 'testToken' }
+      const token = await this.getToken()
+      const authentiction = { 'Authorization': token }
 
       mpvue.request({
         method,
@@ -18,7 +29,7 @@ export default class Http {
         header: Object.assign(header, authentiction),
         url: `${this.service}${url}`,
         data,
-        success: resolve,
+        success: ({data}) => resolve(data),
         fail: reject
       })
     })

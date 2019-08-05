@@ -69,6 +69,8 @@
 
 <script>
 
+import {addbill} from './api'
+
 export default {
   data () {
     return {
@@ -106,10 +108,16 @@ export default {
       this.chooseKey = key
       // this.indexPicker = e.mp.detail.value
     },
-    submit () {
-      wx.navigateBack({
-        delta: 1
+    async submit () {
+      console.log('fire')
+      await addbill({
+        amount: 500,
+        type: 'GENERAL',
+        remark: 'test'
       })
+      // wx.navigateBack({
+      //   delta: 1
+      // })
     }
   }
 }
