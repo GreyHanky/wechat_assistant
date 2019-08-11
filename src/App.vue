@@ -5,8 +5,8 @@ import {login} from './api'
 async function wxLogin () {
   const {code} = await proxyMpvue.login()
   // await proxyMpvue.hasAuth()
+  console.log(code)
   const {encryptedData, iv} = await proxyMpvue.getUserInfo()
-  console.log(encryptedData)
   const {token} = await login({code, encryptedData, iv})
   await proxyMpvue.setStorage({key: 'token', data: token})
 }
@@ -21,7 +21,11 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-    wxLogin()
+    try {
+      wxLogin()
+    } catch (error) {
+      console.log(error)
+    }
     let logs
     if (mpvuePlatform === 'my') {
       logs = mpvue.getStorageSync({key: 'logs'}).data || []
@@ -58,6 +62,9 @@ body {
 
 .text-right {
   text-align: right;
+}
+.text-center{
+  text-align: center;
 }
 .mt-10 {
   margin-top: 10px;

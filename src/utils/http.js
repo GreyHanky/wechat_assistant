@@ -22,7 +22,7 @@ export default class Http {
       const { header = {} } = options
       const token = await this.getToken()
       const authentiction = { 'Authorization': token }
-
+      mpvue.showLoading({mask: true})
       mpvue.request({
         method,
         ...options,
@@ -30,7 +30,10 @@ export default class Http {
         url: `${this.service}${url}`,
         data,
         success: ({data}) => resolve(data),
-        fail: reject
+        fail: reject,
+        complete: () => {
+          mpvue.hideLoading()
+        }
       })
     })
   }

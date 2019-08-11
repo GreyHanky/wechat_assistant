@@ -10,12 +10,17 @@ const date = day().format('YYYY-MM')
 
 const store = new Vuex.Store({
   state: {
-    date
+    // 查询日期
+    date,
+    // 查询数据列表
+    list: []
   },
   mutations: {
-    update: (state, {date}) => {
-      const obj = state
-      obj.date = date
+    updateTime: (state, { date }) => {
+      state.date = date
+    },
+    updateList: (state, { list }) => {
+      state.list = list
     }
   }
 })

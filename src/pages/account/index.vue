@@ -17,18 +17,18 @@
           </picker>
         </div>
       </div>
-      <div class="header-item">
+      <div class="header-item text-right">
         <div class="title">支出(元)</div>
         <div class="header-content">
-          <div>2342343</div>
+          <div>{{totalAmount}}</div>
         </div>
       </div>
-      <div class="header-item">
+      <!-- <div class="header-item">
         <div class="title">收入(元)</div>
         <div class="header-content">
           <div>2342343</div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="content-body">
       <navbar></navbar>
@@ -37,15 +37,27 @@
 </template>
 
 <script>
+import day from 'dayjs'
 import store from './store'
 import navbar from './navbar'
+import {billList} from './api'
+
+async function getList () {
+  const startTime = day(store.state.date).startOf('month').valueOf()
+  const endTime = day(store.state.date).endOf('month').valueOf()
+
+  const {data} = await billList({startTime, endTime})
+  store.commit('updateList', {list: data})
+}
 
 export default {
   data () {
     return {
-
       ...store.state
     }
+  },
+  mounted () {
+    getList()
   },
   components: {
     navbar
@@ -58,12 +70,16 @@ export default {
     month () {
       const [, month] = store.state.date.split('-')
       return month
+    },
+    totalAmount () {
+      return store.state.list.reduce((sum, {amount}) => sum + amount, 0)
     }
   },
   methods: {
     bindDateChange (e) {
       const date = e.target.value
-      store.commit('update', {date})
+      store.commit('updateTime', {date})
+      getList()
     }
   }
 }
@@ -101,6 +117,6 @@ export default {
   }
 }
 .content-body {
-  flex:1;
+  flex: 1;
 }
 </style>

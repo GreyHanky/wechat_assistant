@@ -1,8 +1,8 @@
 {
   "pages": [
-     "pages/addConsumeBill/main",
     "pages/index/main",
-     "pages/account/main"
+     "pages/account/main",
+     "pages/addConsumeBill/main"
      ],
   "window": {
     "backgroundTextStyle": "light",
