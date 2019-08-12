@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import store from '../store'
 import mpvueF2 from 'mpvue-f2'
 const F2 = require('@antv/f2')
 
@@ -24,7 +24,6 @@ export default {
     }
   },
   mounted () {
-    console.log('mounted')
   },
   props: ['status'],
   components: {
@@ -89,14 +88,17 @@ export default {
         // canvas.add(group);
         shape.label = group
       }
-      const data = [
-        { type: '饮食', cost: 669.47, a: '1' },
-        { type: '服饰美容', cost: 338, a: '1' },
-        { type: '健康', cost: 118.5, a: '1' },
-        { type: '生活用品', cost: 78.64, a: '1' },
-        { type: '其他', cost: 14.9, a: '1' },
-        { type: '交通出行', cost: 8.7, a: '1' }
-      ]
+      const data = store.state.list.map(({typeText, amount}) => ({
+        type: typeText, cost: amount, a: 1
+      }))
+      // [
+      //   { type: '饮食', cost: 669.47, a: '1' },
+      //   { type: '服饰美容', cost: 338, a: '1' },
+      //   { type: '健康', cost: 118.5, a: '1' },
+      //   { type: '生活用品', cost: 78.64, a: '1' },
+      //   { type: '其他', cost: 14.9, a: '1' },
+      //   { type: '交通出行', cost: 8.7, a: '1' }
+      // ]
 
       let sum = 0
       let chart = null
@@ -200,7 +202,7 @@ export default {
       chart.tooltip(false)
       chart.interval()
         .position('a*cost')
-        .color('type', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
+        .color('type', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0', '#42b983'])
         .adjust('stack')
 
       chart.guide().text({

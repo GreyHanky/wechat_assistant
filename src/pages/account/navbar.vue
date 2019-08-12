@@ -81,6 +81,8 @@ export default {
     activeIndex (value) {
       if (value === '1') {
         this.isSlider1 = true
+      } else {
+        this.isSlider1 = false
       }
     }
   }
@@ -95,7 +97,6 @@ export default {
 // .weui-navbar {
 //   height: 54px;
 // }
-
 
 .weui-navbar__slider_0 {
   left: 29rpx;

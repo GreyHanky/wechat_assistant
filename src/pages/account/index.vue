@@ -37,18 +37,8 @@
 </template>
 
 <script>
-import day from 'dayjs'
 import store from './store'
 import navbar from './navbar'
-import {billList} from './api'
-
-async function getList () {
-  const startTime = day(store.state.date).startOf('month').valueOf()
-  const endTime = day(store.state.date).endOf('month').valueOf()
-
-  const {data} = await billList({startTime, endTime})
-  store.commit('updateList', {list: data})
-}
 
 export default {
   data () {
@@ -57,7 +47,8 @@ export default {
     }
   },
   mounted () {
-    getList()
+    store.dispatch('getBills')
+    store.dispatch('getTypes')
   },
   components: {
     navbar
@@ -79,7 +70,7 @@ export default {
     bindDateChange (e) {
       const date = e.target.value
       store.commit('updateTime', {date})
-      getList()
+      store.dispatch('getBills')
     }
   }
 }

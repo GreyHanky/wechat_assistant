@@ -3,8 +3,12 @@ import proxyMpvue from './utils/proxyMpvue.js'
 import {login} from './api'
 
 async function wxLogin () {
+  const {authSetting} = await proxyMpvue.getSetting()
+  if (!authSetting['scope.userInfo']) {
+    await proxyMpvue.authorize({scope: 'scope.userInfo'})
+  }
+
   const {code} = await proxyMpvue.login()
-  // await proxyMpvue.hasAuth()
   console.log(code)
   const {encryptedData, iv} = await proxyMpvue.getUserInfo()
   const {token} = await login({code, encryptedData, iv})
